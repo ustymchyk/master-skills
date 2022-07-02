@@ -13,10 +13,7 @@
         "polyfills": "apps/master-skills/src/polyfills.ts",
         "tsConfig": "apps/master-skills/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/master-skills/src/favicon.ico",
-          "apps/master-skills/src/assets"
-        ],
+        "assets": ["apps/master-skills/src/favicon.ico", "apps/master-skills/src/assets"],
         "styles": ["apps/master-skills/src/styles.scss"],
         "scripts": []
       },
@@ -74,10 +71,7 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/master-skills/**/*.ts",
-          "apps/master-skills/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/master-skills/**/*.ts", "apps/master-skills/**/*.html"]
       }
     },
     "test": {

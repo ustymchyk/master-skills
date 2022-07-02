@@ -2,7 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "data-access": "libs/data-access",
     "master-skills": "apps/master-skills",
-    "master-skills-e2e": "apps/master-skills-e2e"
+    "utils": "libs/utils"
   }
 }
