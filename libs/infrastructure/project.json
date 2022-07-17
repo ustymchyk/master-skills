@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/infrastructure/src",
+  "prefix": "ustymchyk",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/infrastructure"],
+      "options": {
+        "jestConfig": "libs/infrastructure/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/infrastructure/**/*.ts", "libs/infrastructure/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

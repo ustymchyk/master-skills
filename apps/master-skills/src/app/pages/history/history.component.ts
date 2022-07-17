@@ -5,14 +5,20 @@ import { trackById } from '@ustymchyk/utils';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ustymchyk-notifications',
+  selector: 'ustymchyk-history',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
+  template: `
+    <ul>
+      <li *ngFor="let notification of notifications$ | async; trackBy: trackById">
+        <h3>{{ notification.title }}</h3>
+        <p>{{ notification.description }}</p>
+      </li>
+    </ul>
+  `,
 })
-export class NotificationsComponent {
+export class HistoryComponent {
   trackById = trackById;
   notifications$: Observable<Notification[]> = getNotifications();
 }

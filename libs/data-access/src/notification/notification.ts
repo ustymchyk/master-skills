@@ -1,7 +1,16 @@
-import { inject, Provider } from '@angular/core';
+import { inject, InjectionToken, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NotificationServiceImplementation } from './notification.service';
 import { FullNotification, Notification } from './types';
+
+export interface NotificationService {
+  listenNewNotifications(): Observable<Notification>;
+  getNotifications(): Observable<Notification[]>;
+  getFullNotification(id: Notification['id']): Observable<FullNotification>;
+  viewNotification(id: Notification['id']): void;
+}
+
+const NotificationService = new InjectionToken<NotificationService>('NotificationService');
 
 export const notificationRootProvider = (): Provider => ({
   provide: NotificationService,
@@ -11,10 +20,3 @@ export const notificationRootProvider = (): Provider => ({
 export const getNotifications = (): ReturnType<NotificationService['getNotifications']> => {
   return inject(NotificationService).getNotifications();
 };
-
-export abstract class NotificationService {
-  abstract listenNewNotifications(): Observable<Notification>;
-  abstract getNotifications(): Observable<Notification[]>;
-  abstract getFullNotification(id: Notification['id']): Observable<FullNotification>;
-  abstract viewNotification(id: Notification['id']): void;
-}

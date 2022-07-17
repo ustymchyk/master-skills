@@ -1,22 +1,19 @@
-export const NotificationTypes = {
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR',
-} as const;
+export type NotificationTypes = 'SUCCESS' | 'ERROR';
 
-export const NotificationStatus = {
-  NEW: 'NEW',
-  VIEWED: 'VIEWED',
-} as const;
+export type NotificationStatus = 'NEW' | 'VIEWED';
+
+export type NotificationPosition = 'LT' | 'RT' | 'RB' | 'LB';
 
 export interface Notification {
   id: string;
   title: string;
-  type: keyof typeof NotificationTypes;
+  type: NotificationTypes;
   description: string;
+  position?: NotificationPosition;
 }
 
 export interface FullNotification extends Notification {
   created: number;
-  status: keyof typeof NotificationStatus;
+  status: NotificationStatus;
   fullDescription: string;
 }

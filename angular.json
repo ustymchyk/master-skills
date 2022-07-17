@@ -2,7 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "cdk": "libs/cdk",
     "data-access": "libs/data-access",
+    "infrastructure": "libs/infrastructure",
     "master-skills": "apps/master-skills",
     "utils": "libs/utils"
   }

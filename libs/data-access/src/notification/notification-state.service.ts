@@ -1,20 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { FullNotification, Notification, NotificationStatus, NotificationTypes } from './types';
-
-const notificationList: FullNotification[] = [...Array(10).keys()].map((id) => ({
-  id: String(id),
-  title: `Title ${id}`,
-  type: Math.random() < 0.5 ? NotificationTypes.SUCCESS : NotificationTypes.ERROR,
-  description: `Notification description ${id}`,
-  fullDescription: `Full description of ${id} notification`,
-  created: Date.now(),
-  status: Math.random() < 0.5 ? NotificationStatus.NEW : NotificationStatus.VIEWED,
-}));
+import { mockNotificationList } from './mock';
+import { FullNotification, Notification, NotificationStatus } from './types';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationStateService {
-  private notificationList$ = new BehaviorSubject<FullNotification[]>(notificationList);
+  private notificationList$ = new BehaviorSubject<FullNotification[]>(mockNotificationList());
 
   getNotificationList(): Observable<Notification[]> {
     return this.notificationList$.asObservable();
@@ -36,7 +27,7 @@ export class NotificationStateService {
         if (notification.id === id) {
           return {
             ...notification,
-            status: NotificationStatus.VIEWED,
+            status: 'VIEWED',
           };
         }
 
