@@ -6,11 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'ustymchyk-home',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, CommonModule, MatButtonModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, CommonModule, MatButtonModule, MatInputModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: ['.form { display: flex; flex-direction: column; width: 200px; margin-left: auto; margin-right: auto}'],
   template: `
@@ -37,19 +37,25 @@ import { MatButtonModule } from '@angular/material/button';
 
       <br />
 
+      <mat-form-field appearance="fill">
+        <mat-label>Time</mat-label>
+        <input matInput placeholder="3000" [formControl]="timeControl" />
+      </mat-form-field>
+
       <button mat-button color="primary" (click)="showNotification()">Show notification</button>
     </div>
   `,
 })
 export class HomeComponent {
+  private readonly defaultTime = 3000;
   private index = 0;
 
-  public positionOptions: NotificationPosition[] = ['LB', 'LT', 'RB', 'RT'];
-
-  public typeOptions: NotificationTypes[] = ['SUCCESS', 'ERROR'];
+  public readonly positionOptions: NotificationPosition[] = ['LB', 'LT', 'RB', 'RT'];
+  public readonly typeOptions: NotificationTypes[] = ['SUCCESS', 'ERROR'];
 
   public positionControl = new FormControl(this.positionOptions[0]);
   public typeControl = new FormControl(this.typeOptions[0]);
+  public timeControl = new FormControl(this.defaultTime);
 
   constructor(private readonly toaster: ToasterService) {}
 
@@ -63,7 +69,7 @@ export class HomeComponent {
     this.toaster.show({
       data: notification,
       position: notification.position || 'RB',
-      time: 3000,
+      time: this.timeControl.value ?? this.defaultTime,
       type: notification.type,
     });
   }
